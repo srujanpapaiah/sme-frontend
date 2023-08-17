@@ -9,10 +9,7 @@ const Login = () => {
 
   const loginUser = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:8000", {
-      email: data.email,
-      password: data.password,
-    });
+    axios.get("/");
   };
   return (
     <div>

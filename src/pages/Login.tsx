@@ -1,28 +1,38 @@
-import { useState } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast/headless";
 import { useNavigate } from "react-router-dom";
 
+type UserData = {
+  email: string;
+  password: string;
+};
+
 const Login = () => {
   const navigate = useNavigate();
-  const [data, setData] = useState({
+  const [data, setData] = useState<UserData>({
     email: "",
     password: "",
   });
 
-  const loginUser = async (e) => {
+  const loginUser = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { email, password } = data;
 
     try {
-      const { data } = await axios.post("/login", {
+      const response = await axios.post("/login", {
         email,
         password,
       });
-      if (data.error) {
-        toast.error(data.error);
+      const responseData = response.data;
+
+      if (responseData.error) {
+        toast.error(responseData.error);
       } else {
-        setData({});
+        setData({
+          email: "",
+          password: "",
+        });
         toast.success("Login Successful");
         navigate("/dashboard");
       }
@@ -30,22 +40,33 @@ const Login = () => {
       console.log(error);
     }
   };
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
   return (
     <div>
       <form onSubmit={loginUser}>
         <label>Email</label>
         <input
           type="email"
+          name="email"
           placeholder="Enter Email"
           value={data.email}
-          onChange={(e) => setData({ ...data, email: e.target.value })}
+          onChange={handleInputChange}
         />
         <label>Password</label>
         <input
           type="password"
+          name="password"
           placeholder="Enter Password"
           value={data.password}
-          onChange={(e) => setData({ ...data, password: e.target.value })}
+          onChange={handleInputChange}
         />
         <button type="submit">Login</button>
       </form>

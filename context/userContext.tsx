@@ -1,9 +1,14 @@
+// UserContext.js
+import { createContext, useState, useEffect, ReactNode } from "react";
 import axios from "axios";
-import { createContext, useState, useEffect } from "react";
 
 export const UserContext = createContext({});
 
-export function UserContextProvider({ children }) {
+interface UserContextProviderProps {
+  children: ReactNode;
+}
+
+export function UserContextProvider({ children }: UserContextProviderProps) {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -11,14 +16,13 @@ export function UserContextProvider({ children }) {
       axios
         .get("/profile")
         .then(({ data }) => {
-          // Fixed parentheses
           setUser(data);
         })
         .catch((error) => {
           console.error("Error fetching user profile:", error);
         });
     }
-  }, [user]); // Add user to dependency array
+  }, [user]);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

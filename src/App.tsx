@@ -9,7 +9,7 @@ import { Toaster } from "react-hot-toast";
 import { UserContextProvider } from "../context/userContext";
 import Dashboard from "./pages/Dashboard";
 
-axios.defaults.baseURL = "http://localhost:8080";
+axios.defaults.baseURL = "https://gold-bright-trout.cyclic.app";
 axios.defaults.withCredentials = true;
 
 function App() {

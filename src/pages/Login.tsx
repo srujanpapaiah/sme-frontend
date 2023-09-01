@@ -33,7 +33,7 @@ const Login = () => {
         }
       );
       const responseData = response.data;
-      console.log(responseData);
+      console.log(response);
 
       if (responseData.error) {
         toast.error(responseData.error);

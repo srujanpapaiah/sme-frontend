@@ -2,6 +2,7 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast/headless";
 import { useNavigate } from "react-router-dom";
+axios.defaults.withCredentials = true;
 
 type UserData = {
   email: string;

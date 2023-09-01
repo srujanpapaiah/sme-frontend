@@ -10,7 +10,6 @@ import { UserContextProvider } from "../context/userContext";
 import Dashboard from "./pages/Dashboard";
 
 axios.defaults.baseURL = "https://gold-bright-trout.cyclic.app";
-axios.defaults.withCredentials = true;
 
 function App() {
   return (

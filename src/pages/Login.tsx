@@ -20,10 +20,17 @@ const Login = () => {
     const { email, password } = data;
 
     try {
-      const response = await axios.post("/login", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "/login",
+        {
+          email,
+          password,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
       const responseData = response.data;
 
       if (responseData.error) {

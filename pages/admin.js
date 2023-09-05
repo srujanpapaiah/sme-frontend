@@ -11,12 +11,15 @@ export default function Home() {
   const [tableData, setTableData] = useState([]);
   const [name, setName] = useState("");
 
-  const backendBaseURL = "https://brown-artist-oykby.pwskills.app:4000";
+  const backendBaseURL = "https://gold-bright-trout.cyclic.app";
 
   const getData = async () => {
-    const result = await fetch(backendBaseURL + "/getAll/" + name + "?date=" + startDate, {
-      method: "GET",
-    })
+    const result = await fetch(
+      backendBaseURL + "/getAll/" + name + "?date=" + startDate,
+      {
+        method: "GET",
+      }
+    )
       .then((res) => res.json())
       .catch((err) => console.log(err));
 
@@ -50,7 +53,7 @@ export default function Home() {
 
   useEffect(() => {
     getData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name]);
 
   const handleNameChange = (e) => {
@@ -61,9 +64,9 @@ export default function Home() {
   const [startDate, setStartDate] = useState(new Date());
 
   useEffect(() => {
-    getData()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [startDate])
+    getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [startDate]);
 
   return (
     <div>
@@ -74,7 +77,9 @@ export default function Home() {
           <option value="Parag">Parag</option>
           <option value="Aman Kumar">Aman Kumar</option>
           <option value="Vidya Sagar">Vidya Sagar</option>
-          <option value="Sukumar">Sukumar</option>
+          <option value="Yashraj">Yashraj</option>
+          <option value="Thomas">Thomas</option>
+          <option value="Sanjay">Sanjay</option>
         </select>
 
         <div>
@@ -82,7 +87,7 @@ export default function Home() {
             dateFormat={"dd/MM/yyyy"}
             selected={startDate}
             onChange={(date) => {
-              console.log(date)
+              console.log(date);
               setStartDate(date);
             }}
           />
@@ -93,7 +98,7 @@ export default function Home() {
         <button onClick={deleteData}>Delete All</button>
       </div>
       <div className="sheet">
-      <Spreadsheet darkMode data={tableData}  />
+        <Spreadsheet darkMode data={tableData} />
       </div>
     </div>
   );

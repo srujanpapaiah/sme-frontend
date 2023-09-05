@@ -124,7 +124,9 @@ export default function Home() {
           <option value="Parag">Parag</option>
           <option value="Aman Kumar">Aman Kumar</option>
           <option value="Vidya Sagar">Vidya Sagar</option>
-          <option value="Sukumar">Sukumar</option>
+          <option value="Yashraj">Yashraj</option>
+          <option value="Thomas">Thomas</option>
+          <option value="Sanjay">Sanjay</option>
         </select>
 
         <div>
@@ -186,7 +188,9 @@ export function RenderAnalytics({ tableData }) {
     "Aman Kumar",
     "Parag",
     "Vidya Sagar",
-    "Sukumar",
+    "Yashraj",
+    "Thomas",
+    "Sanjay",
   ];
 
   function countRowsForName(name) {
@@ -207,7 +211,7 @@ export function RenderAnalytics({ tableData }) {
   const maxCountObj = result.reduce((max, obj) => {
     return obj.count > max.count ? obj : max;
   });
-  console.log(maxCountObj)
+  console.log(maxCountObj);
 
   return (
     <div

@@ -75,7 +75,9 @@ export default function Home() {
           <option value="Parag">Parag</option>
           <option value="Aman Kumar">Aman Kumar</option>
           <option value="Vidya Sagar">Vidya Sagar</option>
-          <option value="Sukumar">Sukumar</option>
+          <option value="Yashraj">Yashraj</option>
+          <option value="Thomas">Thomas</option>
+          <option value="Sanjay">Sanjay</option>
         </select>
 
         <div style={{ display: "flex" }}>

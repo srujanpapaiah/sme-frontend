@@ -11,23 +11,26 @@ export default function Home() {
   const [tableData, setTableData] = useState([]);
   const [name, setName] = useState("");
 
-  const backendBaseURL = "https://brown-artist-oykby.pwskills.app:4000";
+  const backendBaseURL = "https://gold-bright-trout.cyclic.app";
 
   const getData = async () => {
-    const result = await fetch(backendBaseURL + "/getAll/" + name + "?date=" + startDate, {
-      method: "GET",
-    })
+    const result = await fetch(
+      backendBaseURL + "/getAll/" + name + "?date=" + startDate,
+      {
+        method: "GET",
+      }
+    )
       .then((res) => res.json())
       .catch((err) => console.log(err));
 
     setTableData(
       result?.map((item) => {
         return Object.values(item).map((d, i) => {
-            if (dayjs(d).isValid()) {
-              return {
-                value: dayjs(d).format("DD/MM/YYYY"),
-              };
-            }
+          if (dayjs(d).isValid()) {
+            return {
+              value: dayjs(d).format("DD/MM/YYYY"),
+            };
+          }
           return { value: d };
         });
       })
@@ -48,7 +51,7 @@ export default function Home() {
 
   useEffect(() => {
     getData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name]);
 
   const handleNameChange = (e) => {
@@ -59,9 +62,9 @@ export default function Home() {
   const [startDate, setStartDate] = useState(new Date());
 
   useEffect(() => {
-    getData()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [startDate])
+    getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [startDate]);
 
   return (
     <div>
@@ -75,21 +78,29 @@ export default function Home() {
           <option value="Sukumar">Sukumar</option>
         </select>
 
-        <div style={{display: "flex"}}>
-          <button onClick={() => {
-            setStartDate(dayjs(startDate).subtract(1, "day").toDate())
-          }} >&lt;</button>
+        <div style={{ display: "flex" }}>
+          <button
+            onClick={() => {
+              setStartDate(dayjs(startDate).subtract(1, "day").toDate());
+            }}
+          >
+            &lt;
+          </button>
           <DatePicker
             dateFormat={"dd/MM/yyyy"}
             selected={startDate}
             onChange={(date) => {
-              console.log(date)
+              console.log(date);
               setStartDate(date);
             }}
           />
-          <button onClick={() => {
-            setStartDate(dayjs(startDate).add(1, "day").toDate())
-          }} >&gt;</button>
+          <button
+            onClick={() => {
+              setStartDate(dayjs(startDate).add(1, "day").toDate());
+            }}
+          >
+            &gt;
+          </button>
         </div>
 
         <button onClick={getData}>Refecth</button>
@@ -97,7 +108,7 @@ export default function Home() {
         {/* <button onClick={deleteData}>Delete All</button> */}
       </div>
       <div className="sheet">
-      <Spreadsheet darkMode data={tableData}  />
+        <Spreadsheet darkMode data={tableData} />
       </div>
     </div>
   );

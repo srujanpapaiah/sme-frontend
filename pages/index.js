@@ -108,11 +108,10 @@ export default function Home() {
         </div>
 
         <button onClick={getData}>Refecth</button>
-        <button>
-          <Router>
-            <Link to="/detail">Detail</Link>
-          </Router>
-        </button>
+
+        <Router>
+          <Link to="/detail">Detail</Link>
+        </Router>
 
         {/* <button onClick={deleteData}>Delete All</button> */}
       </div>

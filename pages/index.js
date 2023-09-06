@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Card from "../component/Card";
 
 export default function Home() {
   const [tableData, setTableData] = useState([]);
@@ -112,6 +113,52 @@ export default function Home() {
       <div className="sheet">
         <Spreadsheet darkMode data={tableData} />
       </div>
+    </div>
+  );
+}
+
+export function RenderAnalytics({ tableData }) {
+  const smeNames = [
+    "Srujan Papaiahgari",
+    "Aman Kumar",
+    "Parag",
+    "Vidya Sagar",
+    "Yashraj",
+    "Thomas",
+    "Sanjay",
+  ];
+
+  function countRowsForName(name) {
+    let count = 0;
+    for (let i = 0; i < tableData.length; i++) {
+      if (tableData[i][5].value === name) {
+        count++;
+      }
+    }
+    return {
+      name,
+      count,
+    };
+  }
+
+  const result = smeNames.map((name) => countRowsForName(name));
+
+  const maxCountObj = result.reduce((max, obj) => {
+    return obj.count > max.count ? obj : max;
+  });
+  console.log(maxCountObj);
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        margin: "20px",
+      }}
+    >
+      {result?.map((data) => (
+        <Card key={data?.name} {...data} maxCountObj={maxCountObj} />
+      ))}
     </div>
   );
 }

@@ -7,7 +7,6 @@ import dayjs from "dayjs";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Card from "../component/Card";
-import { Link } from "react-router-dom";
 
 export default function Home() {
   const [tableData, setTableData] = useState([]);
@@ -108,9 +107,6 @@ export default function Home() {
         </div>
 
         <button onClick={getData}>Refecth</button>
-        <button>
-          <Link to="/detail">Details</Link>
-        </button>
 
         {/* <button onClick={deleteData}>Delete All</button> */}
       </div>

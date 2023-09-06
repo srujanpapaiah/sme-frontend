@@ -7,7 +7,6 @@ import dayjs from "dayjs";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Card from "../component/Card";
-import Link from "next/link";
 
 export default function Home() {
   const [tableData, setTableData] = useState([]);

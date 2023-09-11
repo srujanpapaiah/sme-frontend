@@ -1,9 +1,7 @@
-import FreeExpire from '../component/FreeTrial'
-import '../styles/globals.css'
+import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
-  return <FreeExpire />
+  return <Component {...pageProps} />;
 }
 
-export default MyApp
+export default MyApp;

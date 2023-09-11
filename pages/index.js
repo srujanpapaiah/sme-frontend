@@ -1,82 +1,68 @@
-import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
-import { Spreadsheet } from "react-spreadsheet";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { Spreadsheet } from "react-spreadsheet";
 import Card from "../component/Card";
 import Link from "next/link";
 
 export default function Home() {
   const [tableData, setTableData] = useState([]);
   const [name, setName] = useState("");
+  const [startDate, setStartDate] = useState(new Date());
+  const [loading, setLoading] = useState(false); // New loading state
+  const [error, setError] = useState(null); // New error state
 
   const backendBaseURL = "https://gold-bright-trout.cyclic.app";
 
   const getData = async () => {
-    const result = await fetch(
-      backendBaseURL + "/getAll/" + name + "?date=" + startDate,
-      {
-        method: "GET",
+    setLoading(true); // Set loading to true while fetching data
+    setError(null); // Reset error state
+
+    try {
+      const response = await fetch(
+        backendBaseURL + "/getAll/" + name + "?date=" + startDate,
+        {
+          method: "GET",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP Error! Status: ${response.status}`);
       }
-    )
-      .then((res) => res.json())
-      .catch((err) => console.log(err));
 
-    setTableData(
-      result?.map((item) => {
-        return Object.values(item).map((d, i) => {
-          if (dayjs(d).isValid()) {
-            return {
-              value: dayjs(d).format("DD/MM/YYYY"),
-            };
-          }
-          return { value: d };
-        });
-      })
-    );
+      const result = await response.json();
+
+      setTableData(
+        result?.map((item) => {
+          return Object.values(item).map((d, i) => {
+            if (dayjs(d).isValid()) {
+              return {
+                value: dayjs(d).format("DD/MM/YYYY"),
+              };
+            }
+            return { value: d };
+          });
+        })
+      );
+    } catch (error) {
+      setError(error.message); // Set error state if there's an error
+    } finally {
+      setLoading(false); // Set loading back to false after fetching
+    }
   };
-
-  // const deleteData = async () => {
-  //   const result = await fetch(backendBaseURL + "/deleteAll/" + name, {
-  //     method: "DELETE",
-  //   })
-  //     .then((res) => res.json())
-  //     .then((res) => {
-  //       getData();
-  //       return res;
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
 
   useEffect(() => {
     getData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [name]);
-
-  const clickHandle = (e) => {
-    e.preventDefault();
-    router.push(href);
-  };
-
-  const handleNameChange = (e) => {
-    // localStorage.setItem("name", e.target.value)
-    setName(e.target.value);
-    console.log(e.target.value);
-  };
-  const [startDate, setStartDate] = useState(new Date());
-
-  useEffect(() => {
-    getData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [startDate]);
+  }, [name, startDate]);
 
   return (
     <div>
       <div className="top-container">
-        <select style={{ padding: 10 }} onChange={handleNameChange}>
+        <select
+          style={{ padding: 10 }}
+          onChange={(e) => setName(e.target.value)}
+        >
           <option value="">Select SME</option>
           <option value="Srujan Papaiahgari">Srujan Papaiahgari</option>
           <option value="Parag">Parag</option>
@@ -84,7 +70,7 @@ export default function Home() {
           <option value="Vidya Sagar">Vidya Sagar</option>
           <option value="Yashraj">Yashraj</option>
           <option value="Thomas">Thomas</option>
-          <option value="Sanjay">Sanjay</option>
+          <option value="Sanjay">Sanjay</option>{" "}
         </select>
 
         <div style={{ display: "flex" }}>
@@ -109,7 +95,7 @@ export default function Home() {
             }}
           >
             &gt;
-          </button>
+          </button>{" "}
         </div>
         <div>
           <button onClick={getData}>Refetch</button>
@@ -117,11 +103,10 @@ export default function Home() {
             <Link href="/detail">Detail</Link>
           </button>
         </div>
-
-        {/* <button onClick={deleteData}>Delete All</button> */}
       </div>
-      {!name && <RenderAnalytics tableData={tableData} />}
-
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error}</p>}{" "}
+      {!loading && !error && !name && <RenderAnalytics tableData={tableData} />}
       <div className="sheet">
         <Spreadsheet darkMode data={tableData} />
       </div>
@@ -143,7 +128,7 @@ export function RenderAnalytics({ tableData }) {
   function countRowsForName(name) {
     let count = 0;
     for (let i = 0; i < tableData.length; i++) {
-      if (tableData[i][5].value === name) {
+      if (tableData[i][5]?.value === name) {
         count++;
       }
     }

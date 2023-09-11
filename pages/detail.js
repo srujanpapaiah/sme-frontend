@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { Spreadsheet } from "react-spreadsheet";
 import { useEffect, useState } from "react";
@@ -154,9 +153,12 @@ export default function Home() {
           </button>
         </div>
 
-        <button onClick={getData}>Refecth</button>
-
-        {/* <button onClick={deleteData}>Delete All</button> */}
+        <div>
+          <button onClick={getData}>Refecth</button>
+          {/* {smeName === "Srujan Papaiahgari" && (
+            <button onClick={deleteData}>Delete All</button>
+          )} */}
+        </div>
       </div>
       {!name && <RenderAnalytics tableData={tableData} />}
       <div className="sheet">

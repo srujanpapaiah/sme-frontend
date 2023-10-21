@@ -73,8 +73,6 @@ export default function Home() {
       <div className="top-container">
         <select style={{ padding: 10 }} onChange={handleNameChange}>
           <option value="">Select SME</option>
-          <option value="Srujan Papaiahgari">Srujan Papaiahgari</option>
-          <option value="Parag">Parag</option>
           <option value="Aman Kumar">Aman Kumar</option>
           <option value="Vidya Sagar">Vidya Sagar</option>
           <option value="Yashraj">Yashraj</option>

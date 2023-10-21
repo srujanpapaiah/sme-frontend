@@ -64,8 +64,6 @@ export default function Home() {
           onChange={(e) => setName(e.target.value)}
         >
           <option value="">Select SME</option>
-          <option value="Srujan Papaiahgari">Srujan Papaiahgari</option>
-          <option value="Parag">Parag</option>
           <option value="Aman Kumar">Aman Kumar</option>
           <option value="Vidya Sagar">Vidya Sagar</option>
           <option value="Yashraj">Yashraj</option>
@@ -115,15 +113,7 @@ export default function Home() {
 }
 
 export function RenderAnalytics({ tableData }) {
-  const smeNames = [
-    "Srujan Papaiahgari",
-    "Aman Kumar",
-    "Parag",
-    "Vidya Sagar",
-    "Yashraj",
-    "Thomas",
-    "Sanjay",
-  ];
+  const smeNames = ["Aman Kumar", "Vidya Sagar", "Yashraj", "Thomas", "Sanjay"];
 
   function countRowsForName(name) {
     let count = 0;

@@ -120,10 +120,9 @@ export default function Home() {
         <select style={{ padding: 10 }} onChange={handleNameChange}>
           <option value="">Select SME</option>
           <option value="Aman Kumar">Aman Kumar</option>
-          <option value="Vidya Sagar">Vidya Sagar</option>
           <option value="Yashraj">Yashraj</option>
-          <option value="Thomas">Thomas</option>
           <option value="Sanjay">Sanjay</option>
+          <option value="Nithya Arul">Nithya Arul</option>
         </select>
 
         <div>
@@ -183,15 +182,7 @@ export default function Home() {
 }
 
 export function RenderAnalytics({ tableData }) {
-  const smeNames = [
-    "Srujan Papaiahgari",
-    "Aman Kumar",
-    "Parag",
-    "Vidya Sagar",
-    "Yashraj",
-    "Thomas",
-    "Sanjay",
-  ];
+  const smeNames = ["Aman Kumar", "Yashraj", "Sanjay", "Nithya Arul"];
 
   function countRowsForName(name) {
     let count = 0;

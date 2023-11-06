@@ -1,6 +1,3 @@
-import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
 import { Spreadsheet } from "react-spreadsheet";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
@@ -74,10 +71,9 @@ export default function Home() {
         <select style={{ padding: 10 }} onChange={handleNameChange}>
           <option value="">Select SME</option>
           <option value="Aman Kumar">Aman Kumar</option>
-          <option value="Vidya Sagar">Vidya Sagar</option>
           <option value="Yashraj">Yashraj</option>
-          <option value="Thomas">Thomas</option>
           <option value="Sanjay">Sanjay</option>
+          <option value="Sanjay">Nithya Arul</option>
         </select>
 
         <div>
